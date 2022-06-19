@@ -10,7 +10,6 @@ import (
 	"path/filepath"
 )
 
-
 func main() {
 
 	// Download image using API key
@@ -32,26 +31,26 @@ func main() {
 	// }
 
 	// Download image
-    url := "http://i.imgur.com/m1UIjW1.jpg"
-    response, e := http.Get(url)
-    if e != nil {
-        log.Fatal(e)
-    }
-    defer response.Body.Close()
+	url := "http://i.imgur.com/m1UIjW1.jpg"
+	response, e := http.Get(url)
+	if e != nil {
+		log.Fatal(e)
+	}
+	defer response.Body.Close()
 
 	// Save image
 	// To-do create folder if not exists
 	file, err := os.Create("./tmp/asdf.jpg")
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer file.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
 
 	// Use io.Copy to just dump the response body to the file. This supports huge files
-    _, err = io.Copy(file, response.Body)
-    if err != nil {
-        log.Fatal(err)
-    }
+	_, err = io.Copy(file, response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	image, _ := filepath.Abs("./tmp/asdf.jpg")
 	cmd := exec.Command("JPEGView", image)
